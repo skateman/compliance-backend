@@ -6,6 +6,7 @@ require 'insights/api/common/logger_with_audit'
 require 'insights/api/common/platform'
 require 'insights/api/common/host_inventory'
 require 'insights/api/common/identity_header'
+require 'insights/api/common/rbac'
 
 # Module to hold every platform-related code
 module Insigths

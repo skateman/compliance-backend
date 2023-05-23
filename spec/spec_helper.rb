@@ -24,3 +24,9 @@ def stub_rbac_permissions(*permissions)
   allow(Rbac::API_CLIENT).to receive(:get_principal_access).and_return(role)
 end
 # rubocop:enable Metrics/MethodLength
+
+def response_body_data
+  response.parsed_body['data']
+end
+
+Dir['./spec/support/**/*.rb'].sort.each { |f| require f }

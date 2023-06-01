@@ -439,6 +439,17 @@ objects:
     # mounted and available. Its value is just a placeholder and does contain anything sensitive.
     secret_key_base: 'VGhpcyBpcyBhIHBsYWNlaG9sZGVyIHZhbHVlCg=='
 
+- apiVersion: v1
+  kind: CyndiPipeline
+  metadata:
+    name: ${APP_NAME}
+  spec:
+    appName: ${APP_NAME}
+    insightsOnly: ${{CYNDI_INSIGHTS_ONLY}}
+    validationThreshold: ${{CYNDI_VALIDATION_THRESHOLD}}
+    maxAge: ${{CYNDI_MAX_AGE}}
+    topic:  ${{CYNDI_SOURCE_TOPIC}}
+
 parameters:
 - name: IMAGE_TAG
   description: Image tag
@@ -564,3 +575,11 @@ parameters:
 - name: QE_ACCOUNTS
   description: Pipe-separated list of numerical identifiers
   required: false
+- name: CYNDI_INSIGHTS_ONLY
+  value: "false"
+- name: CYNDI_VALIDATION_THRESHOLD
+  value: "5"
+- name: CYNDI_MAX_AGE
+  value: "45"
+- name: CYNDI_SOURCE_TOPIC
+  value: "platform.inventory.events"

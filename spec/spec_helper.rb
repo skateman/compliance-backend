@@ -28,5 +28,3 @@ end
 def response_body_data
   response.parsed_body['data']
 end
-
-Dir['./spec/support/**/*.rb'].sort.each { |f| require f }

@@ -140,3 +140,30 @@ jobs:
       run: bin/rails db:create db:migrate
     - name: Check if migrations altered the schema.rb
       run: "! git diff --unified=0 -- db/schema.rb | grep ^+ActiveRecord"
+    - name: Validate the OpenAPI schema
+      run: |
+        echo '-- ENV'
+        set
+        echo '-- before:'
+        cat swagger/v1/openapi.json
+        cp swagger/v1/openapi.json openapi.old.json
+        bin/rake rswag:specs:swaggerize
+        echo '-- after:'
+        cat swagger/v1/openapi.json
+        symbols=( '"' '[' '{' )
+        for symbol in "${symbols[@]}"; do
+          NEW=$(cat swagger/v1/openapi.json | tr -cd "${symbol}" | wc -c)
+          OLD=$(cat openapi.old.json | tr -cd "${symbol}" | wc -c)
+          echo $NEW
+          echo $OLD
+          echo '---'
+          if [[ "${OLD}" != "${NEW}" ]]; then
+            echo 'OpenAPI Spec needs to be updated:'
+            echo '$ bin/rake rswag:specs:swaggerize'
+            rm openapi.old.json
+            exit 1
+          fi
+        done
+        echo 'Success'
+        exit 0
+        rm openapi.old.json

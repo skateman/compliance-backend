@@ -224,15 +224,15 @@ objects:
         # If we can configure the metrics endpoint to listen to 9000 this definitions should go away
         livenessProbe:
           httpGet:
-            path: /api/compliance/v1/openapi.json
+            path: /api/compliance/v1/status
             port: web
-          initialDelaySeconds: 120
+          initialDelaySeconds: 150
           periodSeconds: 30
         readinessProbe:
           httpGet:
-            path: /api/compliance/v1/status
+            path: /api/compliance/v1/openapi.json
             port: web
-          initialDelaySeconds: 90
+          initialDelaySeconds: 120
           periodSeconds: 30
         resources:
           limits:
@@ -498,7 +498,7 @@ parameters:
 - name: MEMORY_REQUEST_SERVICE
   value: 600Mi
 - name: CPU_LIMIT_SERVICE
-  value: 1200m
+  value: 800m
 - name: CPU_REQUEST_SERVICE
   value: 200m
 - name: MEMORY_LIMIT_CONSUMER

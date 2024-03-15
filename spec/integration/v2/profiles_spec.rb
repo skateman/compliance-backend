@@ -36,7 +36,7 @@ describe 'Profiles', swagger_doc: 'v2/openapi.json' do
         let(:sort_by) { ['title'] }
         v2_collection_schema 'profile'
 
-        after { |e| autogenerate_examples(e, 'List of Profiles sorted by "profile:asc"') }
+        after { |e| autogenerate_examples(e, 'List of Profiles sorted by "title:asc"') }
 
         run_test!
       end

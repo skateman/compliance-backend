@@ -9,6 +9,7 @@ module Api
       include Errors
       include Metadata
       include Profile
+      include Rule
       include SecurityGuide
 
       SCHEMAS = {
@@ -17,6 +18,7 @@ module Api
         links: LINKS,
         metadata: METADATA,
         profile: PROFILE,
+        rule: RULE,
         security_guide: SECURITY_GUIDE
       }.freeze
     end
